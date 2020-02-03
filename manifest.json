@@ -1,0 +1,12 @@
+{
+  "short_name": "帅哥",
+  "name": "蔡帅哥",
+  "icon": [
+      {
+          "src": "1.png",
+          "type": "image/png",
+          "sizes": "48x48"
+      }
+  ],
+  "start_url": "index.html"
+}
