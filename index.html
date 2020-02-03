@@ -9,9 +9,22 @@
 </head>
 <body>
   <script>
-    console.log(2313)
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+            navigator.serviceWorker.register('/sw.js', {scope: '/'})
+                .then(function (registration) {
+
+                    // 注册成功
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                })
+                .catch(function (err) {
+
+                    // 注册失败:(
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+        });
+    }
     window.addEventListener('beforeinstallprompt', function (e) {
-      console.log(2313)
     // beforeinstallprompt event fired
 
       e.userChoice.then(function (choiceResult) {
