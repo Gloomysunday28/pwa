@@ -1,7 +1,7 @@
 {
   "short_name": "帅哥",
   "name": "蔡帅哥",
-  "icon": [
+  "icons": [
       {
           "src": "1.png",
           "type": "image/png",

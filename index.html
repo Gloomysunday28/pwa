@@ -1,41 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="manifest" href="./manifest.json">
-  <title>Document</title>
+    <meta charset="utf-8">
+    <title>basic</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1,user-scalable=no,minimal-ui">
+    <link rel="shortcut icon" href="https://www.baidu.com/favicon.ico" type="image/x-icon">
+    <link rel="manifest" href="./manifest.json">
+    <style>
+        body, html {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            background: #2196f3;
+        }
+
+        .content {
+            width: 200px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            color: #fff;
+            text-align: center;
+        }
+
+        .text {
+            height: 30px;
+            text-align: center;
+            font-size: 24px;
+            line-height: 30px;
+        }
+
+        .button {
+            width: 120px;
+            height: 40px;
+            line-height: 40px;
+            margin: 10px auto 0;
+            background: #f44336;
+            border-radius: 8px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .button:active {
+            background: #f51210;
+        }
+    </style>
 </head>
 <body>
-  <script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-            navigator.serviceWorker.register('./sw.js')
-                .then(function (registration) {
+    <div class="content">
+        <div class="text">Hello PWA!</div>
+        <div class="button" id="btn">点击显示横幅</div>
+    </div>
+    <script>
+        if (navigator.serviceWorker) {
+            navigator.serviceWorker.register('./sw.js');
+        }
+    </script>
+    <script>
+        var dfdPrompt = null;
+        var button = document.getElementById('btn');
 
-                    // 注册成功
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                })
-                .catch(function (err) {
-
-                    // 注册失败:(
-                    console.log('ServiceWorker registration failed: ', err);
-                });
+        window.addEventListener('beforeinstallprompt', function (e) {
+            // 存储事件
+            dfdPrompt = e;
+            // 显示按钮
+            button.style.display = 'block';
+            // 阻止默认事件
+            e.preventDefault();
+            return false;
         });
-    }
-    window.addEventListener('beforeinstallprompt', function (e) {
-    // beforeinstallprompt event fired
 
-      e.userChoice.then(function (choiceResult) {
-          if (choiceResult.outcome === 'dismissed') {
-              console.log('用户取消安装应用');
-          }
-          else {
-              console.log('用户安装了应用');
-          }
-      });
-  });
-  </script>
+        button.addEventListener('click', function (e) {
+            if (dfdPrompt == null) {
+                return;
+            }
+            // 通过按钮点击事件触发横幅显示
+            dfdPrompt.prompt();
+            // 监控用户的安装行为
+            dfdPrompt.userChoice.then(function (choiceResult) {
+                alert(choiceResult.outcome);
+            });
+            // 隐藏按钮
+            button.style.display = 'none';
+            dfdPrompt = null;
+        });
+    </script>
 </body>
 </html>
