@@ -8,6 +8,21 @@
   <title>Document</title>
 </head>
 <body>
-  
+  <script>
+    console.log(2313)
+    window.addEventListener('beforeinstallprompt', function (e) {
+      console.log(2313)
+    // beforeinstallprompt event fired
+
+      e.userChoice.then(function (choiceResult) {
+          if (choiceResult.outcome === 'dismissed') {
+              console.log('用户取消安装应用');
+          }
+          else {
+              console.log('用户安装了应用');
+          }
+      });
+  });
+  </script>
 </body>
 </html>
