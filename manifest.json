@@ -1,6 +1,6 @@
 {
-  "short_name": "帅哥",
-  "name": "蔡帅哥",
+  "short_name": "handsome",
+  "name": "handsome body",
   "icons": [
       {
           "src": "1.png",
@@ -9,5 +9,6 @@
       }
   ],
   "start_url": "index.html",
-  "display": "standalone"
+  "display": "standalone",
+  "scope": "../"
 }
