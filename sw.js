@@ -1,9 +1,9 @@
 var cacheName = 'shell-content';
 
 var filesToCache = [
-    '/style.css',
-    '/index.html',
-    '/'
+    './style.css',
+    './index.html',
+    './'
 ];
 
 // 预缓存部分资源
